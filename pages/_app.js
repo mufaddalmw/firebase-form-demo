@@ -3,13 +3,22 @@ import '../styles/globals.css'
 // add firebase
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import getConfig from "next/config";
+
+// Only holds serverRuntimeConfig and publicRuntimeConfig
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig()
+// Will only be available on the server-side
+
+// Will be available on both server-side and client-side
+console.log(publicRuntimeConfig.APIKEY)
+
 // TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCh7SAOjgM8oIJUnzk4nXx4Sv-0Gcnsd5k",
+  apiKey: publicRuntimeConfig.APIKEY,
   authDomain: "fir-form-demo-9e4f3.firebaseapp.com",
+  databaseURL: "https://fir-form-demo-9e4f3-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "fir-form-demo-9e4f3",
   storageBucket: "fir-form-demo-9e4f3.appspot.com",
   messagingSenderId: "43946527156",
@@ -19,8 +28,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-
-function MyApp({ Component, pageProps }) {
+function MyApp({Component, pageProps}) {
   return <Component {...pageProps} />
 }
 
